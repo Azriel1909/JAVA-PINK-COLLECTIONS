@@ -1,8 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class Asignaturas implements Comparable<Asignaturas> {
 	private String nombre;
@@ -10,6 +14,11 @@ public class Asignaturas implements Comparable<Asignaturas> {
 //	Interface - Polymorphism - change class depending on implementations
 	private List<Clase> claseLista = new ArrayList<>();
 //									 new LinkedList<>();
+
+	private Collection<Alumno> alumnos = new HashSet<>();
+//	private Collection<Alumno> alumnos = new LinkedHashSet<>(); // Order
+	
+	private Map<String, Alumno> alumnoMap = new HashMap<>();
 	
 	public Asignaturas(String nombre, int tiempo) {
 		super();
@@ -48,6 +57,23 @@ public class Asignaturas implements Comparable<Asignaturas> {
 //	to add classes
 	public void addClase(Clase clase){
 		this.claseLista.add(clase);
+	}
+	
+	public void addAlumno(Alumno alumno) {
+		this.alumnos.add(alumno);
+		this.alumnoMap.put(alumno.getPassword(), alumno);
+	}
+	
+	public boolean existeAlumno (Alumno alumno){
+		return this.alumnos.contains(alumno);
+	}
+	
+	public Collection<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public Map<String, Alumno> getAlumnoMap() {
+		return alumnoMap;
 	}
 
 	@Override
